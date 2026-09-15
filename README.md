@@ -1,4 +1,4 @@
-# 🔥 Horno Asimov
+# Horno Asimov
 
 Un horno tostador comercial convertido en horno de **reflow** para soldar placas
 SMD/THT — control térmico en un ESP32-S3 corriendo **Zephyr RTOS**, controlado
@@ -15,35 +15,12 @@ Energy**.
 
 ---
 
-## Stack
-
-<p align="left"><b>Firmware embebido</b></p>
-<p align="left">
-  <img src="https://img.shields.io/badge/C-00599C?style=flat-square&logo=c&logoColor=white">
-  <img src="https://img.shields.io/badge/Zephyr_RTOS-000000?style=flat-square&logo=zephyrproject&logoColor=white">
-  <img src="https://img.shields.io/badge/CMake-064F8C?style=flat-square&logo=cmake&logoColor=white">
-  <img src="https://img.shields.io/badge/ESP32--S3-E7352C?style=flat-square&logo=espressif&logoColor=white">
-</p>
-
-<p align="left"><b>Conectividad</b></p>
-<p align="left">
-  <img src="https://img.shields.io/badge/Bluetooth_Low_Energy-0082FC?style=flat-square&logo=bluetooth&logoColor=white">
-  <img src="https://img.shields.io/badge/GATT-custom_service-0082FC?style=flat-square">
-</p>
-
-<p align="left"><b>App móvil</b></p>
-<p align="left">
-  <img src="https://img.shields.io/badge/Kotlin-7F52FF?style=flat-square&logo=kotlin&logoColor=white">
-  <img src="https://img.shields.io/badge/Jetpack_Compose-4285F4?style=flat-square&logo=jetpackcompose&logoColor=white">
-  <img src="https://img.shields.io/badge/Android-3DDC84?style=flat-square&logo=android&logoColor=white">
-</p>
-
 ## Supported targets
 
 | Board | Estado |
 |---|---|
-| **Seeed XIAO ESP32S3** | ✅ Soportado — target de referencia, probado en hardware real |
-| Cualquier board con BLE soportada por Zephyr | 🧩 Debería andar con solo agregar `boards/<board>.overlay` — la lógica de aplicación (`Firmware/lib/`) no usa APIs específicas del fabricante, solo APIs estándar de Zephyr (ver [RNF-07](docs/01-REQUERIMIENTOS/requerimientos.md)) |
+| **Seeed XIAO ESP32s3 - ESP32s3** | Soportado — target de referencia, probado en hardware real |
+| Cualquier board con BLE soportada por Zephyr | Debería andar con solo agregar `boards/<board>.overlay` — la lógica de aplicación (`Firmware/lib/`) no usa APIs específicas del fabricante, solo APIs estándar de Zephyr (ver [RNF-07](docs/01-REQUERIMIENTOS/requerimientos.md)) |
 
 ## Estructura del repo
 
@@ -90,7 +67,7 @@ source <tu-zephyrproject>/.venv/bin/activate
 export ZEPHYR_BASE=<tu-zephyrproject>/zephyr
 
 # build
-west build -b xiao_esp32s3/esp32s3/procpu -d build .
+west build -p always -b xiao_esp32s3/esp32s3/procpu -- -DDTC_OVERLAY_FILE=boards/xiao_esp32s3.overlay
 
 # flash (agregá --esp-device /dev/ttyACM0 si detecta el puerto mal)
 west flash -d build
