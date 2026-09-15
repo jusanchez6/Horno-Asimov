@@ -1,9 +1,9 @@
 # Horno Asimov
 
-Un horno tostador comercial convertido en horno de **reflow** para soldar placas
-SMD/THT — control térmico en un ESP32-S3 corriendo **Zephyr RTOS**, controlado
-y monitoreado en tiempo real desde una **app Android** por **Bluetooth Low
-Energy**.
+Un horno tostador comercial convertido en horno de reflow para soldar placas
+SMD/THT — control térmico en un ESP32-S3 corriendo Zephyr RTOS, controlado
+y monitoreado en tiempo real desde una app Android por Bluetooth Low
+Energy.
 
 <p align="left">
   <img alt="Zephyr RTOS" src="https://img.shields.io/badge/Zephyr_RTOS-firmware-7B3FF2?style=for-the-badge&logo=zephyrproject&logoColor=white">
@@ -45,7 +45,7 @@ Energy**.
 
 - **Zephyr workspace** (`west`) instalado siguiendo la [guía oficial de
   Zephyr](https://docs.zephyrproject.org/latest/develop/getting_started/index.html)
-  — este repo **no** trae su propio `west.yml`; `Firmware/` es una app
+  — este repo no trae su propio `west.yml`; `Firmware/` es una app
   freestanding que se compila contra un workspace Zephyr ya existente
   (`$ZEPHYR_BASE`).
 - **Zephyr SDK** (toolchain Xtensa para ESP32), instalado vía `west sdk
@@ -56,7 +56,7 @@ Energy**.
 - **`adb`** (Android Platform Tools) para instalar/debuggear en el
   dispositivo.
 - Un ESP32-S3 (probado en Seeed XIAO ESP32S3) por USB.
-- Opcional pero recomendado para debug: **nRF Connect for Mobile** (Nordic
+- Opcional pero recomendado para debug: nRF Connect for Mobile (Nordic
   Semiconductor) — deja inspeccionar el servicio GATT sin depender de la app.
 
 ## Firmware (Zephyr)
