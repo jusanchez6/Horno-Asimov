@@ -1,0 +1,7 @@
+<resources>
+    <style name="Theme.HornoReflow" parent="android:Theme.Material.NoActionBar">
+        <item name="android:windowBackground">@color/asimov_background</item>
+        <item name="android:statusBarColor">@color/asimov_background</item>
+        <item name="android:navigationBarColor">@color/asimov_background</item>
+    </style>
+</resources>
