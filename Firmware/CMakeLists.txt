@@ -9,4 +9,5 @@ target_sources(app PRIVATE
 	src/main.c
 	lib/oven/oven_control.c
 	lib/ble/oven_ble.c
+	lib/drivers/thermocouple.c
 )

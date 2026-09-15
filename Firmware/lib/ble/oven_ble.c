@@ -207,22 +207,24 @@ void oven_ble_notify_estado(void)
 
 void oven_ble_notify_salud(void)
 {
+	struct oven_snapshot snap;
 	uint8_t buf[SALUD_PKT_LEN];
 	uint32_t uptime_s = (uint32_t)(k_uptime_get() / 1000);
 	int err;
 
+	oven_get_snapshot(&snap);
+
 	/* Paquete de Salud (14 bytes, little-endian, ver protocolo.md seccion
-	 * 3). Todavia no hay termocupla/MAX6675 real conectado, asi que
-	 * sensor_ok queda en 0 y el resto son valores de ejemplo (no
-	 * simulados de forma realista, solo para probar que el empaquetado
-	 * de bytes es correcto).
+	 * 3). sensor_ok ya es real (viene de la termocupla MAX6675); heap
+	 * libre y temp. del chip siguen siendo placeholders (todavia no
+	 * leemos esos datos del sistema).
 	 */
 	buf[0] = 1; /* protocol_version */
 	sys_put_le32(uptime_s, &buf[1]);
 	sys_put_le16(200, &buf[5]);           /* free_heap_kb: placeholder */
 	sys_put_le16((uint16_t)390, &buf[7]); /* cpu_temp_c_x10: 39.0 C placeholder */
 	buf[9] = 0;  /* reset_reason: POWER_ON */
-	buf[10] = 0; /* sensor_ok: sin sensor real todavia */
+	buf[10] = snap.sensor_ok ? 1 : 0;
 	buf[11] = 0; /* fw_version major */
 	buf[12] = 1; /* fw_version minor */
 	buf[13] = 0; /* fw_version patch */

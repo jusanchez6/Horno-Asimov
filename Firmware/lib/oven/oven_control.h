@@ -9,6 +9,7 @@
 #ifndef OVEN_CONTROL_H_
 #define OVEN_CONTROL_H_
 
+#include <stdbool.h>
 #include <stdint.h>
 
 /* Valores de OvenState. Coinciden por diseno con el byte "state" del
@@ -26,6 +27,15 @@ enum oven_state_code {
 	OVEN_STATE_FAULT = 6,
 };
 
+/* Valores de fault_code. Todavia no estan enumerados en protocolo.md mas
+ * alla de "0 = sin falla"; se van a ir agregando a medida que se implementen
+ * las protecciones de RNF-01/RNF-02 (limite de temperatura, etc.).
+ */
+enum oven_fault_code {
+	OVEN_FAULT_NONE = 0,
+	OVEN_FAULT_SENSOR = 1, /* termocupla desconectada o fallo de lectura SPI */
+};
+
 /* Foto de solo lectura del estado del horno en un instante dado. */
 struct oven_snapshot {
 	uint8_t state;
@@ -35,7 +45,11 @@ struct oven_snapshot {
 	uint16_t remaining_s;
 	uint8_t profile_id;
 	uint8_t fault_code;
+	bool sensor_ok; /* termocupla conectada y leyendo bien (RF-02) */
 };
+
+/** Inicializa las capas de mas abajo (hoy: la termocupla). */
+bool oven_control_init(void);
 
 /** Inicia un trabajo con el perfil indicado (comando START_JOB). */
 void oven_start_job(uint8_t profile_id);
