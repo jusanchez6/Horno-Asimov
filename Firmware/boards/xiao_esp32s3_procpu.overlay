@@ -1,0 +1,32 @@
+#include <zephyr/dt-bindings/gpio/gpio.h>
+
+/*
+ * Horno de reflujo SMD - termocupla tipo K via MAX6675 (SPI).
+ *
+ * El bus SPI (spi2, alias "xiao_spi") ya viene habilitado por la placa con
+ * sus pines por defecto:
+ *   SCLK = GPIO7  -> pin D8 del conector
+ *   MISO = GPIO8  -> pin D9  (esta es la salida SO del MAX6675)
+ *   MOSI = GPIO9  -> pin D10 (sin uso: el MAX6675 no tiene entrada de datos)
+ * Lo unico que hace falta agregar aca es el Chip Select, que es especifico
+ * de cada dispositivo SPI y no viene predefinido:
+ *   CS   = GPIO1  -> pin D0
+ *
+ * Cableado al modulo MAX6675: VCC->3V3, GND->GND, SCK->D8, SO->D9, CS->D0.
+ */
+
+&spi2 {
+	cs-gpios = <&gpio0 1 GPIO_ACTIVE_LOW>;
+
+	max6675_0: max6675@0 {
+		compatible = "maxim,max6675";
+		reg = <0>;
+		spi-max-frequency = <4300000>;
+	};
+};
+
+/ {
+	aliases {
+		oven-temp = &max6675_0;
+	};
+};

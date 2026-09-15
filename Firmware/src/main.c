@@ -21,6 +21,10 @@ int main(void)
 	int err;
 	int tick = 0;
 
+	if (!oven_control_init()) {
+		LOG_ERR("oven_control_init fallo (revisa la termocupla)");
+	}
+
 	err = oven_ble_init();
 	if (err) {
 		LOG_ERR("oven_ble_init fallo (err %d)", err);
