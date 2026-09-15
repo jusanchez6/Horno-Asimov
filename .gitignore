@@ -1,0 +1,24 @@
+# --- Zephyr / west (Firmware/) ---
+Firmware/build/
+Firmware/tools/.venv/
+__pycache__/
+*.pyc
+
+# --- Android / Gradle (App/) ---
+App/build/
+App/app/build/
+App/.gradle/
+App/.kotlin/
+App/local.properties
+App/*.iml
+App/.idea/
+App/captures/
+App/.externalNativeBuild/
+App/.cxx/
+*.apk
+*.aab
+
+# --- OS / editor ---
+.DS_Store
+Thumbs.db
+*.swp
