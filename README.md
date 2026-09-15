@@ -102,10 +102,10 @@ paquetes Estado/Comando/Salud) está documentado en
 
 ## Estado del proyecto
 
-- ✅ Conectividad BLE de punta a punta: advertising, reconexión automática,
+- Conectividad BLE de punta a punta: advertising, reconexión automática,
   servicio GATT (Estado/Comando/Salud), app real conectando, parseando e
   iniciando/cancelando trabajos.
-- 🚧 Control térmico real: hoy el firmware **simula** la curva de
+- Control térmico real: hoy el firmware **simula** la curva de
   temperatura. Falta integrar la termocupla tipo K + MAX6675 (SPI) y el
   control de las resistencias vía SSR — ver
   [`docs/01-REQUERIMIENTOS/requerimientos.md`](docs/01-REQUERIMIENTOS/requerimientos.md)
